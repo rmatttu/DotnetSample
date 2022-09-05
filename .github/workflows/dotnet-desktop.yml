@@ -51,6 +51,7 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
+        platform: [x86, x64]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -84,10 +85,12 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
+    # 
     - name: Build the application
-      run: msbuild $env:Solution_Name /t:build /p:Configuration=$env:Configuration
+      run: msbuild $env:Solution_Name /t:build /p:Configuration=$env:Configuration;Platform="$env:Platform"
       env:
         Configuration: ${{ matrix.configuration }}
+        Platform: ${{ matrix.platform }}
 
     # ls files
     # - name: ls files (command prompt command)
