@@ -85,8 +85,14 @@ jobs:
         Configuration: ${{ matrix.configuration }}
 
     # ls files
-    - name: ls files
-      run: dir /s
+    # - name: ls files (command prompt command)
+    #   run: dir /s
+
+    - name: ls files (power shell command)
+      run: Get-ChildItem -Recurse
+
+    - name: ls files (power shell command)
+      run: tree
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
