@@ -84,6 +84,11 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
+    - name: Build the application
+      run: msbuild $env:Solution_Name /t:build /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+
     # ls files
     # - name: ls files (command prompt command)
     #   run: dir /s
