@@ -88,6 +88,12 @@ jobs:
     - name: Restore needed NuGet packages
       run: msbuild $env:Solution_Name /t:Restore /p:RestorePackagesConfig=true
 
+    - name: echo Build command
+      run: echo msbuild $env:Solution_Name /t:build /p:Configuration=${env:Configuration};Platform=${env:Platform}
+      env:
+        Configuration: ${{ matrix.configuration }}
+        Platform: ${{ matrix.platform }}
+
     - name: Build the application
       run: msbuild $env:Solution_Name /t:build /p:Configuration=${env:Configuration};Platform=${env:Test_Value}
       env:
