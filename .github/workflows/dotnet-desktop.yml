@@ -86,7 +86,7 @@ jobs:
 
     # ls files
     - name: ls files
-      run: dir . /S
+      run: dir /S .
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
