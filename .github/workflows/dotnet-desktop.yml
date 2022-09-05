@@ -92,7 +92,7 @@ jobs:
       run: Get-ChildItem -Recurse
 
     - name: ls files (power shell command)
-      run: tree
+      run: tree /f /a
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
