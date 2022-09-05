@@ -89,7 +89,7 @@ jobs:
       run: msbuild $env:Solution_Name /t:Restore /p:RestorePackagesConfig=true
 
     - name: Build the application
-      run: msbuild $env:Solution_Name /t:build /p:Configuration=${env:Configuration};Platform=${Test_Value}
+      run: msbuild $env:Solution_Name /t:build /p:Configuration=${env:Configuration};Platform=${env:Test_Value}
       env:
         Configuration: ${{ matrix.configuration }}
         Test_Value: ${{ matrix.platform }}
