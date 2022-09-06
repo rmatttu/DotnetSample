@@ -108,6 +108,5 @@ jobs:
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: artifacts
-        # path: LARGEWords\bin\${{ matrix.platform }}\${{ matrix.configuration }}
+        name: ${{ matrix.configuration }}-${{ matrix.platform }}
         path: LARGEWords\bin
