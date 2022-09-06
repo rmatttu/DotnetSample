@@ -51,6 +51,7 @@ jobs:
     strategy:
       matrix:
         configuration: [Debug, Release]
+        platform: [Any CPU, x64]
 
     runs-on: windows-latest  # For a list of available runner types, refer to
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
@@ -84,13 +85,29 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
+    - name: Restore needed NuGet packages
+      run: msbuild $env:Solution_Name /t:Restore /p:RestorePackagesConfig=true
+
+    - name: echo Build command
+      run: echo "msbuild $env:Solution_Name /t:build /p:Configuration=${{ matrix.configuration }} /p:Platform=${{ matrix.platform }}"
+
+    - name: Build the application
+      run: msbuild $env:Solution_Name /t:build /p:Configuration=${{ matrix.configuration }} /p:Platform="${{ matrix.platform }}"
+
     # ls files
-    - name: ls files
-      run: dir D:\a\DotnetSample /s
+    # - name: ls files (command prompt command)
+    #   run: dir /s
+
+    - name: ls files (power shell command)
+      run: Get-ChildItem -Recurse
+
+    - name: ls files (power shell command)
+      run: tree /f /a
 
     # Upload the MSIX package: https://github.com/marketplace/actions/upload-a-build-artifact
     - name: Upload build artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: MSIX Package
-        path: ${{ env.Wap_Project_Directory }}\AppPackages
+        name: artifacts
+        # path: LARGEWords\bin\${{ matrix.platform }}\${{ matrix.configuration }}
+        path: LARGEWords\bin
