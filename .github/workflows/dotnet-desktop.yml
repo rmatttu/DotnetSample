@@ -95,8 +95,9 @@ jobs:
       run: msbuild $env:Solution_Name /t:build /p:Configuration=${{ matrix.configuration }} /p:Platform="${{ matrix.platform }}"
 
     # ls files
-    # - name: ls files (command prompt command)
-    #   run: dir /s
+    - name: ls files (command prompt command)
+      shell: cmd
+      run: dir /s
 
     - name: ls files (power shell command)
       run: Get-ChildItem -Recurse
