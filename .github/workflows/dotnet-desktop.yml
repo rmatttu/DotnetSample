@@ -109,4 +109,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.configuration }}-${{ matrix.platform }}
-        path: LARGEWords\bin
+        path: $env:Solution_Name\bin
